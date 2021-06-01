@@ -1,0 +1,14 @@
+<div class="search">
+    <form method="get" action="{% url 'search' %}">
+        {{ my_filter.form.as_p }}
+        {#        <input type="text" class="searchinput" name="searched_course" id="searched_course">#}
+        <input type="submit" value="search">
+    </form>
+</div>
+<script>
+    const form_fields = document.getElementsByTagName('input');
+    form_fields[2].type = "date";
+    form_fields[3].type = "date";
+    form_fields[4].type = "number";
+    form_fields[5].type = "number";
+</script>

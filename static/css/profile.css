@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Montserrat";
+}
+
+.heading{
+	background-color: #ffa801;
+	display: flex;
+	justify-content: space-between;
+	height: 7vh;
+}
+.logo {
+	font-weight: 700;
+	color: white;
+	font-size: 40px;
+	margin-left: 2vw;
+}
+
+.left {
+	margin-left: 5vw;
+	margin-top: 7vh;
+}
+
+h1 {
+	font-size: 55px;
+}
+
+.main-info {
+	display: flex;
+	justify-content: space-between;
+}
+
+.profile-pic {
+	height: 230px;
+
+	margin-right: 10vw;
+	border-radius: 80px;
+	margin-top: 5vh;
+}
+
+.info {
+	font-weight: 500;
+	margin-top: 5vh;
+	font-size: 19px;
+	max-width: 60vw;
+}
+
+.rating {
+	display: flex;
+	margin-left: 3.5vw;
+	margin-top: 2vh;
+}
+
+.rating-number {
+	font-size: 35px;
+	margin-left: 0.5vw;
+	font-weight: 700;
+	margin-top: auto;
+	margin-bottom: auto;
+
+
+}
+
+.star {
+	height: 60px;
+}
+
+.courses {
+	display:flex;
+	margin-top: 5vh	;
+}
+
+.course {
+	height: 20vh;
+	margin-left: 5vw;
+	width: 20vw;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+}
+
+.name {
+	font-weight: 700;
+	text-align: center;
+	margin-top: 3vh;
+	font-size: 25px;
+}
+
+.time {
+	text-align: center;
+	margin-top: 3vh;
+	font-size: 25px;
+}
+
+.course:hover {
+
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}

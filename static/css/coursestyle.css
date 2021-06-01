@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Montserrat";
+}
+
+.heading{
+	background-color: #ffa801;
+	display: flex;
+	justify-content: space-between;
+	height: 7vh;
+}
+.logo {
+	font-weight: 700;
+	color: white;
+	font-size: 40px;
+	margin-left: 2vw;
+}
+
+
+
+.course-name{
+	font-size: 65px;
+	font-weight: 700;
+}
+
+.slots {
+	font-size: 25px;
+}
+
+iframe {
+	margin-top: 4vh;
+}
+
+.main-info {
+	display: flex;
+}
+
+img {
+	width: 6vw;
+}
+
+.rating {
+	font-size: 70px;
+	color: #ffa801;
+	font-weight: 700;
+	margin-top: 3vh;
+	margin-left: 25vw;
+}
+
+.left {
+	margin-left: 5vw;
+	margin-top: 10vh;
+}
+
+.tutor-name{
+	font-size: 40px;
+	margin-left: 20vw;
+	margin-top: 15vh;
+}
+
+.stats {
+	text-align: right;
+	font-size: 20px;
+}
+
+.course-syllabus {
+	margin-top: 15vh;
+	background: rgba(255, 168, 1, 0.1);
+	height: 70vh;
+}
+
+.course-syllabus > p {
+	font-weight: 700;
+	text-align: center;
+	font-size: 55px;
+	color: #ffa801;
+	padding-top: 7vh;
+}
+
+.topics{
+	margin-top: 5vh;
+}
+
+.topics > p{
+	font-size: 30px;
+	text-align: center;
+}
+
+
+.apply {
+	height: 25vh;
+	text-align: center;
+}
+
+.applybutton {
+	border: none;
+	height: 10vh;
+	width: 15vw;
+	color: white;
+	margin-top: 10vh;
+	font-weight: 700;
+	border-radius: 50px;
+	font-size: 35px;
+	background-color: #2ecc71;
+}
+
+.about-course {
+	text-align: center;
+	margin-top: 10vh;
+	font-size: 25px
+}
+
+.li {
+	text-decoration: underline;
+	color: blue;
+	font-size: 20px;
+}
+
+.applybutton:hover {
+	background-color: #27ae60;
+}

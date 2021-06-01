@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main-info">
+        <div class="left">
+            <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+            <div class="info">
+                <p>{{ teacher.about_me }}</p>
+            </div>
+        </div>
+
+        <div class="right">
+            <img src="{{ teacher.profile_picture.url }}" alt="profile picture" class="profile-pic">
+        </div>
+    </div>
+
+    <div class="courses">
+        {% for course in courses %}
+            <div class="course">
+                <p class="name"><a href="{% url 'course_detail' course.pk %}">{{ course.course_name }}</a></p>
+                <p class="description">{{ course.about_course }}</p>
+                <p class="time">{{ lesson.time }}</p>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <p><a href="{% url 'edit_profile' %}">Edit</a></p>
+    <p><a href="{% url 'create_course' %}">Create new course</a></p>
+{% endblock %}

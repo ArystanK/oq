@@ -1,0 +1,25 @@
+.heading {
+    background-color: #ffa801;
+    display: flex;
+    justify-content: space-between;
+    height: 7vh;
+}
+
+.logo {
+    font-weight: 700;
+    color: white;
+    font-size: 40px;
+    margin-left: 2vw;
+}
+
+.login {
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    margin-right: 2vw;
+    margin-top: 1vh;
+}
+
+a {
+    text-decoration: none;
+}

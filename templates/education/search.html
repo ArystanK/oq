@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search{% endblock %}
+{% block style %}
+    {#    <link rel="stylesheet" href="{% static 'css/search_form_style.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/searchstyle.css' %}">
+{% endblock %}
+{% block content %}
+    {% include 'education/search_form.html' %}
+    <div class="results">
+        {% if not courses or courses == null %}
+            <p>No courses was found</p>
+        {% else %}
+            {% for course in courses %}
+                <div class="course-box">
+                    <div class="course-info">
+                        <div class="left">
+                            <div class="course-name"><a
+                                    href="{% url 'course_detail' course.pk %}">{{ course.course_name }}</a></div>
+                            <div class="course-author">{{ course.author }}</div>
+                            <div class="course-author">{{ course.languages }}</div>
+                            <div class="course-time">{{ course.start_date }} - {{ course.end_date }}</div>
+                        </div>
+                    </div>
+                    <div class="course-price">{{ course.price }}/month</div>
+                </div>
+            {% endfor %}
+        {% endif %}
+{% endblock %}

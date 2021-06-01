@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Course{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/coursestyle.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="course-main">
+        <div class="main-info">
+            <div class="left">
+                <div class="course-name">{{ course.course_name }}</div>
+                <div class="slots">Classes in a group of {{ course.max_students }} people</div>
+
+                {#                <iframe width="720" height="420" src="https://www.youtube.com/embed/OTroAxvRNbw"#}
+                {#                        title="YouTube video player" frameborder="0"#}
+                {#                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"#}
+                {#                        allowfullscreen></iframe>#}
+
+            </div>
+            <div class="right">
+                <div class="tutor-name">{{ course.teacher }}</div>
+            </div>
+            {#            TODO: Add edit courses function and work with styles#}
+            {% if request.user == course.teacher.user %}
+                <a href="#">Edit</a>
+            {% endif %}
+        </div>
+
+        <div class="about-course">
+            <p>{{ course.about_course }}</p>
+        </div>
+
+
+        <div class="course-syllabus">
+            <p>Course Syllabus</p>
+
+            <div class="topics">
+                {% for topic in topics %}
+                    <p>{{ topic }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% if request.user.groups.first.name == 'student' %}
+            <div class="apply">
+                <form method="post" action="{% url 'create_group' course.pk %}">
+                    {% csrf_token %}
+                    <label for="language_id">
+                        <p>Select language:
+                            <select name="language" required id="language_id">
+                                {% for language in languages %}
+                                    <option value="{{ language }}">{{ language }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </label>
+                    <input type="submit" value="Apply" class="applybutton">
+                </form>
+            </div>
+        {% else %}
+            {% for group in groups %}
+                {{ group }}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ student }}{% endblock %}
+{% block content %}
+    <p>{{ student }}</p>
+    <p>Email: {{ student.user.username }}</p>
+    <p>My groups:</p>
+    <ol>
+        {% for group in groups %}
+            <li>{{ group }}</li>
+        {% endfor %}
+    </ol>
+    <div class="right">
+        <img src="{{ student.profile_picture.url }}" alt="profile picture" class="profile-pic">
+    </div>
+    <a href="{% url 'edit_student' %}">Edit page</a>
+{% endblock %}

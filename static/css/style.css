@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+}
+
+.find {
+    font-size: 40px;
+    font-weight: 500;
+    margin-left: 5vw;
+    margin-top: 15vh;
+}
+
+.search-box {
+    display: flex;
+}
+
+.search {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    height: 6vh;
+    width: 50vw;
+    margin-left: 5vw;
+    margin-top: 2vh;
+}
+
+.search > .txt {
+    font-weight: 200;
+    opacity: 0.5;
+    margin-top: 1.2vh;
+    margin-left: 2vw;
+    font-size: 20px;
+}
+
+.search-add {
+    height: 6vh;
+    background-color: #ffa801;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    width: 7vw;
+    margin-top: 2vh;
+}
+
+.examples {
+    display: flex;
+    margin-top: 4vh;
+}
+
+.examples > * {
+    height: 4vh;
+    width: 15vw;
+    border-radius: 30px;
+    border: 2px solid #ffa801;
+}
+
+.programm {
+    margin-left: 5vw;
+}
+
+.txt1 {
+    font-weight: 700;
+    color: #ffa801;
+}
+
+.reg {
+    margin-top: 15vh;
+    background: rgba(255, 168, 1, 0.1);
+    height: 50vh;
+}
+
+.reg-box {
+    display: flex
+}
+
+
+.registeras .txt {
+    font-weight: 500;
+    opacity: 1;
+    font-size: 35px;
+    margin-top: 15vh;
+    margin-left: 5vw;
+}
+
+.student {
+    width: 20vw;
+    margin-left: 5vw;
+    margin-top: 3vh;
+    height: 6vh;
+    background-color: #ffa801;
+    border-radius: 30px;
+}
+
+.student > .txt {
+    margin-top: 0;
+    margin-left: 5.5vw;
+    opacity: 1;
+    font-weight: 600;
+    color: white;
+    font-size: 30px;
+}
+
+.tutor {
+    width: 20vw;
+    height: 6vh;
+    margin-top: 3vh;
+    box-sizing: border-box;
+    color: #ffa801;
+    border-radius: 30px;
+    margin-left: 2vw;
+    border: 5px solid #ffa801;
+}
+
+.tutor > .txt {
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 30px;
+    margin-left: 6.5vw;
+}
+
+.register-box {
+    display: flex;
+}
+
+.firtxt {
+    font-size: 45px;
+    margin-top: 8vh;
+    margin-left: 3vw;
+}
+
+.sectxt {
+    font-size: 25px;
+    margin-top: 13vh;
+    margin-left: 3vw;
+}

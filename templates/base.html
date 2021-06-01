@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% block style %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+<body>
+<div class="heading">
+    <div class="logo"><a style="color: #fff" href="{% url 'home' %}">OQ</a></div>
+    <div class="login">
+        {% if not request.user.is_authenticated %}
+            <a style="color: #fff" href="{% url 'login' %}">log in</a>
+        {% else %}
+            <a style="color:#fff; margin-right: 10px;"
+               href="
+                       {% if request.user.groups.first.name != 'student' %}{% url 'profile' %}{% else %}{% url 'student' %}{% endif %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+            <a style="color: #fff" href="{% url 'logout' %}">Log out</a>
+        {% endif %}
+    </div>
+
+</div>
+{% block content %}{% endblock %}
+</body>
+</html>

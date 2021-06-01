@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="head">
+        <div class="head-box">
+            <div class="find">
+                Find a <strong>perfect</strong> matching course
+            </div>
+            <div class="search-box">
+                <form method="get" action="{% url 'search' %}">
+                    <div class="search">
+                        <div class="txt">
+                            <label>
+                                <input name="course_name" id="id_course_name" type="text" placeholder="Search"
+                                       style="width: 600px; border: none; font-size: 20px; margin-top: 10px">
+                            </label>
+                            {#                            <input class="search-add" type="submit">#}
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <div class="examples">
+            {% for course in courses %}
+                <div class="programm">
+                    <div class="txt1"><a href="{% url 'course_detail' course.pk %}"
+                                         style="color: #ffa801; text-decoration: none">{{ course }}</a></div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="reg">
+            <div class="reg-box">
+                <div class="registeras">
+                    <div class="txt">Register as a</div>
+                    <div class="register-box">
+                        <div class="student">
+                            <div class="txt"><a style="color: #000" href="{% url 'register' 1 %}">student</a></div>
+                        </div>
+                        <div class="tutor">
+                            <div class="txt"><a style="color: #000" href="{% url 'register' 0 %}">tutor</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer">
+                    <div class="firtxt">
+                        We offer the best platform
+                        for finding/being a tutor
+                    </div>
+
+                    <div class="sectxt">
+                        homeworks, schedule, lesson records, etc...
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
