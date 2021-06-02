@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Delete group{% endblock %}
+{% block content %}
+    <p>Are you sure you want to delete a {{ group }}?</p>
+    <form method="post" action="{% url 'delete_group' group.pk %}">
+        {% csrf_token %}
+        <a href="{% url 'group_detail' group.pk %}">Cancel</a>
+        <input type="submit" name="Delete">
+    </form>
+{% endblock %}

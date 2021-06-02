@@ -5,7 +5,6 @@
 {% block content %}
     <h1>{{ group }}</h1>
     <p>Language: {{ group.language }}</p>
-
     <p>Students ({{ group.number_of_students }}): </p>
     <ol>
         {% for student in group.students.all %}
@@ -14,7 +13,7 @@
     </ol>
     {% if request.user.groups.first.name != 'student' %}
         <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
-{#        <a href="{% url 'create_assignment' group.pk %}">Add assignment</a>#}
+        {#        <a href="{% url 'create_assignment' group.pk %}">Add assignment</a>#}
     {% endif %}
     {% if lesson_count != 0 %}
         <p>Lessons: </p>
@@ -30,4 +29,5 @@
             {{ assignment }}
         {% endfor %}
     {% endif %}
+    <a href="{% url 'delete_group' group.pk %}">Delete group</a>
 {% endblock %}

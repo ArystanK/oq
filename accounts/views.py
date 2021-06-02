@@ -16,7 +16,7 @@ from .decorators import unauthenticated_user, allowed_users
 def profile_page(request):
     teacher = Teacher.objects.get(user=request.user)
     courses = education.models.Course.objects.filter(teacher=teacher)
-    return render(request, 'accounts/profile.html',
+    return render(request, 'accounts/teacher_profile.html',
                   context={'teacher': teacher, 'courses': courses})
 
 
@@ -30,7 +30,7 @@ def update_profile_teacher(request):
         if form.is_valid():
             form.save()
             return redirect('profile')
-    return render(request, 'accounts/edit_profile_page.html', {'form': form})
+    return render(request, 'accounts/edit_teacher.html', {'form': form})
 
 
 @unauthenticated_user
@@ -53,7 +53,7 @@ def register_page(request, is_student):
             user.groups.add(group)
             messages.success(request, "Account was created for " + str(user))
             return redirect('login')
-    return render(request, 'accounts/application.html', {"is_student": is_student, "form": form})
+    return render(request, 'accounts/registration.html', {"is_student": is_student, "form": form})
 
 
 @unauthenticated_user
@@ -81,7 +81,7 @@ def logout_page(request):
 def student_page(request):
     student = Student.objects.get(user=request.user)
     groups = education.models.Group.objects.filter(students__student_id=student.student_id)
-    return render(request, 'accounts/student.html', {'student': student, 'groups': groups})
+    return render(request, 'accounts/student_profile.html', {'student': student, 'groups': groups})
 
 
 @login_required(login_url='login')

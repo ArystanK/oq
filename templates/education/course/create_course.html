@@ -78,7 +78,7 @@
             {% csrf_token %}
             <p class="add">Add a new course</p>
             <div class="inputs">
-                {{ form }}
+                {{ form.as_p }}
                 <input type="submit" name="Submit">
             </div>
         </form>
