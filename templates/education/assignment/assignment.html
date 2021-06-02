@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}{{ assignment }}{% endblock %}
+{% block content %}
+    <h1>{{ assignment }}</h1>
+    <p>{{ assignment.description }}</p>
+    {% if assignment.task %}
+        <a href="{{ assignment.task.url }}">Task</a>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if request.user.groups.first.name == 'student' %}
+            <label for="id_submission">Submission: </label>
+            <input type="file" name="submission" required id="id_submission">
+            <input type="submit" value="Submit">
+        {% else %}
+            {% if assignment.submission %}
+                <a href="{{ assignment.submission.url }}">Submission</a>
+            {% else %}
+                <p>No submission</p>
+            {% endif %}
+        {% endif %}
+    </form>
+    {% if assignment.grade %}
+        <p>Grade: {{ assignment.grade }}</p>
+    {% else %}
+        <p>Not graded</p>
+    {% endif %}
+    <a href="{% url 'update_assignment' assignment.pk %}">Update</a>
+    <a href="{% url 'delete_assignment' assignment.pk %}">Delete</a>
+{% endblock %}

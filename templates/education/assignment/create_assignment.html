@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Create assignment{% endblock %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+    <script>
+        document.getElementsByTagName('label')[0].hidden = true;
+        const studentSelect = document.getElementById('id_student');
+        let studentOptions = "";
+        {% for student in students.all %}
+            studentOptions += '<option value="{{ student.pk }}">{{ student }}</option>'
+        {% endfor %}
+        studentSelect.innerHTML = studentOptions;
+        const groupSelect = document.getElementById('id_group')
+        groupSelect.hidden = true;
+        groupSelect.innerHTML = '<option value="{{ group.pk }}"></option>'
+    </script>
+{% endblock %}

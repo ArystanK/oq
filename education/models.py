@@ -29,14 +29,15 @@ class Group(models.Model):
 
 class Assignment(models.Model):
     title = models.CharField(max_length=100)
-    link = models.CharField(max_length=255)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    is_submitted = models.BooleanField(default=False)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    description = models.TextField()
+    task = models.FileField(null=True, blank=True)
     submission = models.FileField(null=True, blank=True)
     grade = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.title + " for " + str(self.student)
 
 
 class Lesson(models.Model):

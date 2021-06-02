@@ -17,3 +17,4 @@ class CourseFilter(django_filters.FilterSet):
     class Meta:
         model = Course
         fields = []
+

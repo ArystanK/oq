@@ -13,7 +13,8 @@
     </ol>
     {% if request.user.groups.first.name != 'student' %}
         <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
-        {#        <a href="{% url 'create_assignment' group.pk %}">Add assignment</a>#}
+        <a href="{% url 'create_assignments' group.pk %}">Add assignment for all students</a>
+        <a href="{% url 'create_assignment' group.pk %}">Add assignment for particular student</a>
     {% endif %}
     {% if lesson_count != 0 %}
         <p>Lessons: </p>
@@ -25,9 +26,11 @@
     {% endif %}
     {% if assignment_count != 0 %}
         <p>Assignments: </p>
-        {% for assignment in assignments %}
-            {{ assignment }}
-        {% endfor %}
+        <ol>
+            {% for assignment in assignments %}
+                <li><a href="{% url 'assignment_detail' assignment.pk %}">{{ assignment }}</a></li>
+            {% endfor %}
+        </ol>
     {% endif %}
     {% if request.user.groups.first.name != 'student' %}
         {% if teacher == group.course.teacher %}
