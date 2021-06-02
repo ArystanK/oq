@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Updating {{ course }}{% endblock %}
 {% block content %}
-    {{ form.errors }}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

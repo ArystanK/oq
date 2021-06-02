@@ -1,1 +1,12 @@
 {% extends 'base.html' %}
+{% block title %}{{ lesson }}{% endblock %}
+{% block content %}
+    <h1>{{ lesson }}</h1>
+    <p>{{ lesson.description }}</p>
+    {% if lesson.recording_link %}
+        <a href="{{ lesson.recording_link }}">Recording</a>
+    {% endif %}
+    <p>{{ lesson.time }}</p>
+    <a href="{% url 'delete_lesson' lesson.pk %}">Delete</a>
+    <a href="{% url 'update_lesson' lesson.pk %}">Update</a>
+{% endblock %}

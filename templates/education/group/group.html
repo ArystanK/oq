@@ -19,7 +19,7 @@
         <p>Lessons: </p>
         <ol>
             {% for lesson in lessons %}
-                <li>{{ lesson }}</li>
+                <li><a href="{% url 'lesson_detail' lesson.pk %}">{{ lesson }}</a></li>
             {% endfor %}
         </ol>
     {% endif %}
@@ -29,5 +29,9 @@
             {{ assignment }}
         {% endfor %}
     {% endif %}
-    <a href="{% url 'delete_group' group.pk %}">Delete group</a>
+    {% if request.user.groups.first.name != 'student' %}
+        {% if teacher == group.course.teacher %}
+            <a href="{% url 'delete_group' group.pk %}">Delete group</a>
+        {% endif %}
+    {% endif %}
 {% endblock %}

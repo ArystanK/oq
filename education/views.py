@@ -57,7 +57,7 @@ def update_course_page(request, pk):
             return redirect('profile')
     start_date = str(course.start_date).split()[0]
     end_date = str(course.end_date).split()[0]
-    context = {'form': form, 'start_date': start_date, 'end_date': end_date, 'teacher_id': teacher_id}
+    context = {'form': form, 'start_date': start_date, 'end_date': end_date, 'teacher_id': teacher_id, 'course': course}
     return render(request, "education/course/update_course.html", context)
 
 
@@ -90,20 +90,23 @@ def apply_for_course(request, course_id):
         return redirect('home')
     group = groups.first()
     group.students.add(student)
-    group.number_of_students += 1
+    group.number_of_students = len(group.students.all())
     group.save()
     return redirect('home')
 
 
 @login_required(login_url='login')
 def group_detail(request, pk):
+    teacher = None
+    if request.user.groups.first() == 'teacher':
+        teacher = Teacher.objects.get(user=request.user)
     group = Group.objects.get(pk=pk)
     lessons = Lesson.objects.filter(group=group)
     lesson_count = len(lessons)
     assignments = Assignment.objects.filter(group=group)
     assignment_count = len(assignments)
     context = {'group': group, 'lessons': lessons, 'lesson_count': lesson_count, 'assignments': assignments,
-               'assignment_count': assignment_count}
+               'assignment_count': assignment_count, 'teacher': teacher}
     return render(request, 'education/group/group.html', context)
 
 
@@ -130,3 +133,38 @@ def create_lesson(request, pk):
             form.save()
             return redirect('home')
     return render(request, 'education/lesson/create_lesson.html', {'group': group, 'form': form})
+
+
+@login_required(login_url='login')
+def lesson_detail(request, pk):
+    lesson = Lesson.objects.get(pk=pk)
+    return render(request, 'education/lesson/lesson.html', {'lesson': lesson})
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['teacher'])
+def delete_lesson(request, pk):
+    lesson = Lesson.objects.get(pk=pk)
+    if Teacher.objects.get(user=request.user) != lesson.group.course.teacher:
+        return redirect('home')
+    if request.method == 'POST':
+        lesson.delete()
+        return redirect('home')
+    return render(request, 'education/lesson/delete_lesson.html', {'lesson': lesson})
+
+
+@allowed_users(allowed_roles=['teacher'])
+@login_required(login_url='login')
+def update_lesson(request, pk):
+    lesson = Lesson.objects.get(pk=pk)
+    if Teacher.objects.get(user=request.user) != lesson.group.course.teacher:
+        return redirect('home')
+    form = LessonForm(instance=lesson)
+    teacher_id = lesson.group.course.teacher.pk
+    if request.method == "POST":
+        form = LessonForm(request.POST, instance=lesson)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    context = {'form': form, 'teacher_id': teacher_id, 'lesson': lesson}
+    return render(request, "education/lesson/update_lesson.html", context)
