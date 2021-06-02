@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Updating {{ course }}{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+    <script>
+        // make setting start and end date date fields
+        const fields = document.getElementsByTagName('input');
+        fields[4].type = "date";
+        fields[4].value = '{{ start_date }}';
+        fields[5].type = "date";
+        fields[5].value = '{{ end_date }}';
+
+        // hide teacher selection and set it to registered teacher
+        document.getElementsByTagName('label')[3].hidden = true;
+        const select_teacher = document.getElementById('id_teacher');
+        select_teacher.hidden = true;
+        select_teacher.innerHTML = '<option value="{{ teacher_id }}" selected></option>'
+    </script>
+{% endblock %}

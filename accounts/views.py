@@ -16,9 +16,8 @@ from .decorators import unauthenticated_user, allowed_users
 def profile_page(request):
     teacher = Teacher.objects.get(user=request.user)
     courses = education.models.Course.objects.filter(teacher=teacher)
-    last_lesson = education.models.Lesson.objects.last()
     return render(request, 'accounts/profile.html',
-                  context={'teacher': teacher, 'courses': courses, 'lesson': last_lesson})
+                  context={'teacher': teacher, 'courses': courses})
 
 
 @allowed_users(allowed_roles=['teacher'])

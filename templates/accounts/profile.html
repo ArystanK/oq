@@ -24,12 +24,14 @@
             <div class="course">
                 <p class="name"><a href="{% url 'course_detail' course.pk %}">{{ course.course_name }}</a></p>
                 <p class="description">{{ course.about_course }}</p>
-                <p class="time">{{ lesson.time }}</p>
+                <p class="time">{{ course.start_date.date }}</p>
             </div>
         {% endfor %}
 
     </div>
-
+    <br>
+    <br>
+    <br>
     <p><a href="{% url 'edit_profile' %}">Edit</a></p>
     <p><a href="{% url 'create_course' %}">Create new course</a></p>
 {% endblock %}

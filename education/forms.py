@@ -1,17 +1,11 @@
 from django.forms import ModelForm
-from .models import Course, Group, Assignment, Lesson
+
+from .models import Course, Assignment, Lesson
 
 
 class CourseForm(ModelForm):
     class Meta:
         model = Course
-        fields = "__all__"
-        # exclude = ('teacher',)
-
-
-class GroupForm(ModelForm):
-    class Meta:
-        model = Group
         fields = "__all__"
 
 

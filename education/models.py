@@ -21,16 +21,19 @@ class Group(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     language = models.CharField(max_length=50)
     students = models.ManyToManyField(Student)
-    number_of_students = models.IntegerField(default=0)
+    number_of_students = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.course.course_name + " by " + str(self.course.teacher)
+        return self.course.course_name + " by " + str(self.course.teacher) + " on " + self.language
 
 
 class Assignment(models.Model):
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=255)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    is_submitted = models.BooleanField(default=False)
+    submission = models.FileField(null=True, blank=True)
+    grade = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -39,8 +42,8 @@ class Assignment(models.Model):
 class Lesson(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     description = models.TextField()
-    recording_link = models.TextField()
+    recording_link = models.TextField(null=True, blank=True)
     time = models.DateTimeField()
 
     def __str__(self):
-        return str(self.group) + " at " + str(self.time)
+        return str(self.group) + " at " + str(self.time.date()) + " " + str(self.time.time())

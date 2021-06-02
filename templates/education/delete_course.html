@@ -4,7 +4,7 @@
     <p>Are you sure you want to delete a {{ item }}?</p>
     <form method="post" action="{% url 'delete_course' item.pk %}">
         {% csrf_token %}
-        <a href="{% url 'home' %}">Cancel</a>
+        <a href="{% url 'course_detail' item.pk %}">Cancel</a>
         <input type="submit" name="Delete">
     </form>
 {% endblock %}

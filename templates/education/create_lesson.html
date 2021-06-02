@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create lesson{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+    <script>
+        document.getElementsByTagName('label')[0].hidden = true;
+        const selectGroup = document.getElementById('id_group');
+        selectGroup.hidden = true;
+        selectGroup.innerHTML = "<option value='{{ group.pk }}' selected></option>";
+        document.getElementById('id_time').type = 'datetime-local';
+    </script>
+{% endblock %}

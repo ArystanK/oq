@@ -23,7 +23,8 @@
             </div>
             {#            TODO: Add edit courses function and work with styles#}
             {% if request.user == course.teacher.user %}
-                <a href="#">Edit</a>
+                <p><a href="{% url 'update_course' course.pk %}">Edit</a></p>
+                <p><a href="{% url 'delete_course' course.pk %}">Delete</a></p>
             {% endif %}
         </div>
 
@@ -59,7 +60,7 @@
             </div>
         {% else %}
             {% for group in groups %}
-                {{ group }}
+                <a href="{% url 'group_detail' group.pk %}">{{ group }}</a>
             {% endfor %}
         {% endif %}
     </div>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ group }}
+{% endblock %}
+{% block content %}
+    <h1>{{ group }}</h1>
+    <p>Language: {{ group.language }}</p>
+
+    <p>Students ({{ group.number_of_students }}): </p>
+    <ol>
+        {% for student in group.students.all %}
+            <li>{{ student }}</li>
+        {% endfor %}
+    </ol>
+    {% if request.user.groups.first.name != 'student' %}
+        <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
+{#        <a href="{% url 'create_assignment' group.pk %}">Add assignment</a>#}
+    {% endif %}
+    {% if lesson_count != 0 %}
+        <p>Lessons: </p>
+        <ol>
+            {% for lesson in lessons %}
+                <li>{{ lesson }}</li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+    {% if assignment_count != 0 %}
+        <p>Assignments: </p>
+        {% for assignment in assignments %}
+            {{ assignment }}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

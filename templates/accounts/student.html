@@ -6,7 +6,7 @@
     <p>My groups:</p>
     <ol>
         {% for group in groups %}
-            <li>{{ group }}</li>
+            <li><a href="{% url 'group_detail' group.pk %}">{{ group }}</a></li>
         {% endfor %}
     </ol>
     <div class="right">
