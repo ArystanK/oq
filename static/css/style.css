@@ -16,7 +16,7 @@
 .search-box {
     display: flex;
 }
-*:focus {
+input:focus {
     outline: none;
 }
 .search {
