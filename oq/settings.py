@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'oq_db',
         'USER': 'postgres',
-        'PASSWORD': 'qwerty',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432',
     }
