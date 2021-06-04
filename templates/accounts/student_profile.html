@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
-{% block title %}{{ student }}{% endblock %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
 {% block content %}
-    <p>{{ student }}</p>
-    <p>Email: {{ student.user.username }}</p>
-    <p>My groups:</p>
-    <ol>
-        {% for group in groups %}
-            <li><a href="{% url 'group_detail' group.pk %}">{{ group }}</a></li>
-        {% endfor %}
-    </ol>
+    <div class="main-info">
+    <div class="left">
+        <p>{{ student }}</p>
+        <a href="{% url 'edit_student' %}">Edit page</a>
+        <p>Email: {{ student.user.username }}</p>
+        <p>My groups:</p>
+        <ol>
+            {% for group in groups %}
+                <li><a href="{% url 'group_detail' group.pk %}">{{ group }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
     <div class="right">
         <img src="{{ student.profile_picture.url }}" alt="profile picture" class="profile-pic">
     </div>
-    <a href="{% url 'edit_student' %}">Edit page</a>
+    </div>
 {% endblock %}

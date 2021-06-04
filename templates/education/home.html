@@ -3,6 +3,21 @@
 {% block title %}Home{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .txt1{
+            color: #ffa801;
+            font-size: 20px;
+            text-align: center;
+        }
+        .programm {
+            padding: 10px;
+        }
+        .programm:hover {
+            background-color: #ffa801;
+            color: wheat;
+        }
+
+    </style>
 {% endblock %}
 {% block content %}
     <div class="head">
@@ -30,8 +45,7 @@
         <div class="examples">
             {% for course in courses %}
                 <div class="programm">
-                    <div class="txt1"><a href="{% url 'course_detail' course.pk %}"
-                                         style="color: #ffa801; text-decoration: none">{{ course }}</a></div>
+                    <div class="txt1" onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
                 </div>
             {% endfor %}
         </div>
