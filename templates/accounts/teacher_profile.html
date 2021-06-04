@@ -7,6 +7,62 @@
         .name > a {
             color: #ffa801;
         }
+
+        .course > * {
+            text-align: center;
+        }
+        .course > .description {
+            margin: 10px;
+        }
+
+        .mycourses{
+            color: #ffa801;
+            font-weight: bolder;
+            font-size: 50px;
+            margin-left: 5vw;
+        }
+
+        .courses{
+            flex-wrap: wrap;
+            margin-top: 0;
+        }
+
+        .course {
+            margin-top: 5vh;
+            flex-basis: 25%;
+        }
+
+        .addcourse {
+            box-sizing: border-box;
+            border: 2.5px solid #ffa801;
+        }
+
+        .addcourse > .plus {
+            font-size: 75px;
+            color: #ffa801;
+        }
+        .addcourse > .createnewcourse {
+            color: #ffa801;
+            font-weight: bolder;
+            font-size: 25px;
+        }
+        .edit {
+            font-weight: bolder;
+            color: #ffa801;
+            border: 2.5px solid #ffa801;
+            border-radius: 30px;
+            padding: 10px;
+        }
+
+        .editp{
+            margin-top: 2vh;
+        }
+
+        .edit:hover{
+            background-color: #ffa801;
+            color: white;
+            transition: 0.2s;
+        }
     </style>
 {% endblock %}
 
@@ -14,6 +70,7 @@
     <div class="main-info">
         <div class="left">
             <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+    <p class="editp"><a class="edit" href="{% url 'edit_profile' %}">Edit Profile</a></p>
             <div class="info">
                 <p>{{ teacher.about_me }}</p>
             </div>
@@ -24,6 +81,7 @@
         </div>
     </div>
 
+    <p class="mycourses">My Courses</p>
     <div class="courses">
         {% for course in courses %}
             <div class="course">
@@ -32,11 +90,12 @@
                 <p class="time">{{ course.start_date.date }}</p>
             </div>
         {% endfor %}
-
+        <div class="course addcourse" onclick="window.location.href = '{% url 'create_course' %}';">
+            <p class="plus">+</p>
+            <p class="createnewcourse">Create new course</p>
+        </div>
     </div>
     <br>
     <br>
     <br>
-    <p><a href="{% url 'edit_profile' %}">Edit</a></p>
-    <p><a href="{% url 'create_course' %}">Create new course</a></p>
 {% endblock %}

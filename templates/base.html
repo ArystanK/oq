@@ -7,6 +7,15 @@
     <title>{% block title %}{% endblock %}</title>
     {% block style %}{% endblock %}
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <style>
+        .logout {
+            font-size: 20px;
+            font-weight: bold;
+            border: 2.5px solid white;
+            padding: 5px;
+            border-radius: 30px;
+        }
+    </style>
 </head>
 <body>
 <div class="heading">
@@ -18,7 +27,7 @@
             <a style="color:#fff; margin-right: 10px;"
                href="
                        {% if request.user.groups.first.name != 'student' %}{% url 'profile' %}{% else %}{% url 'student' %}{% endif %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
-            <a style="color: #fff" href="{% url 'logout' %}">Log out</a>
+            <a class="logout" style="color: #fff" href="{% url 'logout' %}">Log out</a>
         {% endif %}
     </div>
 
