@@ -28,6 +28,8 @@ urlpatterns = [
     path('create_group/<int:course_id>', group_views.apply_for_course, name="create_group"),
     path('group_detail/<int:pk>', group_views.group_detail, name="group_detail"),
     path('delete_group/<int:pk>', group_views.delete_group, name="delete_group"),
+    path('my_groups/<int:course_id>', group_views.my_groups, name="my_groups"),
+
 
     path('create_lesson/<int:pk>', lessson_views.create_lesson, name="create_lesson"),
     path('delete_lesson/<int:pk>', lessson_views.delete_lesson, name="delete_lesson"),

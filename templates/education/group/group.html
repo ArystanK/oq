@@ -2,36 +2,132 @@
 {% block title %}
     {{ group }}
 {% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+    <style>
+        h1 {
+            font-size: 45px;
+            margin-left: 5vw;
+            margin-top: 10vh;
+        }
+
+        .lang {
+            margin-left: 5vw;
+        }
+
+        .studnum {
+            margin-top: 7vh;
+        }
+
+        .studs {
+            margin-top: 3vh;
+        }
+
+        ol {
+            font-weight: 600;
+            width: 400px;
+        }
+
+        .main{
+            display: flex;
+        }
+
+        .right {
+            display: flex;
+            margin-left: 10vw;
+            flex-direction: column;
+        }
+
+        .right a {
+            color: white;
+            background-color: #ffa801;
+            border-radius: 30px;
+            padding: 15px;
+            font-weight: 700;
+            margin-top: 3vh;
+        }
+
+        .right a:hover {
+            background-color: #2ecc71;
+            transition: 0.3s;
+        }
+
+        .lesson{
+            display: flex;
+        }
+
+        ol {
+            list-style-type: none;
+        }
+
+        .pp {
+            font-weight: 700;
+            font-size: 30px;
+        }
+
+        .lesson li {
+            margin-top: 2vh;
+        }
+
+        .lesson {
+            border: 3px solid #ffa801;
+            width: 50vw;
+            border-radius: 30px;
+            padding: 20px;
+        }
+        .lesson a:visited {
+            color: blue;
+        }
+
+    </style>
+
+{% endblock %}
 {% block content %}
-    <h1>{{ group }}</h1>
-    <p>Language: {{ group.language }}</p>
-    <p>Students ({{ group.number_of_students }}): </p>
-    <ol>
-        {% for student in group.students.all %}
-            <li>{{ student }}</li>
-        {% endfor %}
-    </ol>
-    {% if request.user.groups.first.name != 'student' %}
-        <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
-        <a href="{% url 'create_assignments' group.pk %}">Add assignment for all students</a>
-        <a href="{% url 'create_assignment' group.pk %}">Add assignment for particular student</a>
-    {% endif %}
-    {% if lesson_count != 0 %}
-        <p>Lessons: </p>
-        <ol>
-            {% for lesson in lessons %}
-                <li><a href="{% url 'lesson_detail' lesson.pk %}">{{ lesson }}</a></li>
-            {% endfor %}
-        </ol>
-    {% endif %}
-    {% if assignment_count != 0 %}
-        <p>Assignments: </p>
-        <ol>
-            {% for assignment in assignments %}
-                <li><a href="{% url 'assignment_detail' assignment.pk %}">{{ assignment }}</a></li>
-            {% endfor %}
-        </ol>
-    {% endif %}
+    <h1>{{ group.course }}</h1>
+
+            <p class="lang">Language: {{ group.language }}</p>
+    <div class="main">
+        <div class="left">
+            <div class="lesson">
+        <div class="lessonleft">
+            {% if lesson_count != 0 %}
+                <p class="pp">Lessons: </p>
+                <ol>
+                    {% for lesson in lessons %}
+                        <li><a href="{% url 'lesson_detail' lesson.pk %}">{{ lesson.time }}</a></li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
+        <div class="lessonright">
+            {% if assignment_count != 0 %}
+                <p class="pp">Assignments: </p>
+                <ol>
+                    {% for assignment in assignments %}
+                        <li><a href="{% url 'assignment_detail' assignment.pk %}">{{ assignment }}</a></li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
+    </div>
+            <p class="studnum">Students ({{ group.number_of_students }}): </p>
+            <ol class="studs">
+                {% for student in group.students.all %}
+                    <li class="stud">{{ student }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="right">
+            {% if request.user.groups.first.name != 'student' %}
+                <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
+                <a href="{% url 'create_assignments' group.pk %}">Add assignment for all students</a>
+                <a href="{% url 'create_assignment' group.pk %}">Add assignment for particular student</a>
+            {% endif %}
+        </div>
+    </div>
+
     {% if request.user.groups.first.name != 'student' %}
         {% if teacher == group.course.teacher %}
             <a href="{% url 'delete_group' group.pk %}">Delete group</a>

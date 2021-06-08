@@ -3,17 +3,63 @@
 {% block title %}Profile{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <style>
+        .student {
+            font-weight: 700;
+        }
+        .edit {
+            font-weight: bolder;
+            color: #ffa801;
+            border: 2.5px solid #ffa801;
+            border-radius: 30px;
+            padding: 10px;
+        }
+
+        .editp{
+            margin-top: 2vh;
+        }
+
+        .edit:hover{
+            background-color: #ffa801;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .mygroups{
+            color: #ffa801;
+            font-weight: bolder;
+            font-size: 50px;
+            margin-top: 15vh;
+        }
+        .group > a{
+            color: black;
+            font-weight: bold;
+            border: 2px solid #ffa801;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        ol {
+            list-style-type: none;
+            margin-top: 5vh;
+        }
+
+        li {
+            margin-top: 5vh;
+        }
+
+    </style>
 {% endblock %}
 {% block content %}
     <div class="main-info">
     <div class="left">
-        <p>{{ student }}</p>
-        <a href="{% url 'edit_student' %}">Edit page</a>
-        <p>Email: {{ student.user.username }}</p>
-        <p>My groups:</p>
+        <h1 class="student">{{ student }}</h1>
+
+        <p class="editp"><a class="edit"href="{% url 'edit_student' %}">Edit Profile</a></p>
+        <p class="mygroups">My groups:</p>
         <ol>
             {% for group in groups %}
-                <li><a href="{% url 'group_detail' group.pk %}">{{ group }}</a></li>
+                <li class="group"><a href="{% url 'group_detail' group.pk %}">{{ group }}</a></li>
             {% endfor %}
         </ol>
     </div>

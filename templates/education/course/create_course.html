@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block style %}
+
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500&display=swap');
 
@@ -7,10 +10,15 @@
             background-color: #ffa801;
         }
 
+        p {
+            margin-top: 4vh;
+        }
+
         form {
-            font-family: 'Montserrat';
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
             background-color: white;
-            height: 85vh;
+            height: 120vh;
             margin-top: 10vh;
             width: 50vw;
             box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.25);
@@ -35,6 +43,12 @@
             width: 150px;
         }
 
+        input[type="number"]{
+            border: none;
+            border-bottom: 2px solid #ffa801;
+            width: 15vw;
+        }
+
         input[type="submit"] {
             border: 5px solid #FFA801;
             border-radius: 50px;
@@ -55,6 +69,13 @@
             color: white;
         }
 
+        input[type="date"]{
+            border: none;
+            border-bottom: 2px solid #ffa801;
+        }
+        textarea{
+            border: 2px solid #ffa801;
+        }
 
         input[type="text"] {
             border: 0;

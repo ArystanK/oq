@@ -1,12 +1,74 @@
 {% extends 'base.html' %}
 {% block title %}{{ lesson }}{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+    <style>
+        h1{
+            font-size: 30px;
+            margin-left: 5vw;
+            margin-top: 10vh;
+        }
+
+        .delete {
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #e74c3c;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+
+        .update{
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #ffa801;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+        .update:hover {
+            background-color: #f39c12;
+        }
+        .delete:hover {
+            background-color: #c0392b;
+        }
+
+        .buttons {
+            margin-left: 5vw;
+            margin-top: 3vh;
+            margin-bottom: 5vh;
+        }
+
+        .main {
+            font-weight: 600;
+            margin-left: 5vw;
+        }
+    </style>
+{% endblock %}
 {% block content %}
-    <h1>{{ lesson }}</h1>
-    <p>{{ lesson.description }}</p>
-    {% if lesson.recording_link %}
-        <a href="{{ lesson.recording_link }}">Recording</a>
+    <h1>{{ lesson.description }}</h1>
+    {% if request.user.groups.first.name != 'student' %}
+        <div class="buttons">
+            <a class="delete" href="{% url 'delete_lesson' lesson.pk %}">Delete</a>
+            <a class="update" href="{% url 'update_lesson' lesson.pk %}">Update</a>
+        </div>
+
     {% endif %}
-    <p>{{ lesson.time }}</p>
-    <a href="{% url 'delete_lesson' lesson.pk %}">Delete</a>
-    <a href="{% url 'update_lesson' lesson.pk %}">Update</a>
+    <div class="main">
+        {% if lesson.recording_link %}
+            <a href="{{ lesson.recording_link }}">Recording</a>
+        {% endif %}
+        <p>Time: {{ lesson.time }}</p>
+    </div>
+
+
+
 {% endblock %}

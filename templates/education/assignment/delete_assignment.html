@@ -1,10 +1,60 @@
 {% extends 'base.html' %}
 {% block title %}Delete assignment{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <style>
+    p {
+            text-align: center;
+            font-weight: 700;
+            font-size: 40px;
+            margin-top: 10vh;
+        }
+        input[type="submit"]{
+            padding: 10px;
+            border: none;
+            background-color: #2ecc71;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-left: 2vw;
+            margin-top: 5vh;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ffa801;
+            transition: 0.2s;
+        }
+
+        form a {
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #e74c3c;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+
+        form a:hover {
+            background-color: #ffa801;
+            transition: 0.2s;
+        }
+        .buttons{
+            text-align: center;
+        }
+    </style>
+{% endblock %}
 {% block content %}
-    <p>Are you sure you want to delete a {{ assignment }}?</p>
+    <p>Are you sure ?</p>
     <form method="post" action="{% url 'delete_assignment' assignment.pk %}">
         {% csrf_token %}
-        <a href="{% url 'assignment_detail' assignment.pk %}">Cancel</a>
-        <input type="submit" name="Delete">
+        <div class="buttons">
+            <a href="{% url 'assignment_detail' assignment.pk %}" class="delete">Cancel</a>
+            <input type="submit" name="Delete" >
+        </div>
     </form>
 {% endblock %}

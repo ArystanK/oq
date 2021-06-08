@@ -28,6 +28,13 @@ def apply_for_course(request, course_id):
     return redirect('home')
 
 
+@allowed_users(allowed_roles=['teacher'])
+@login_required(login_url='login')
+def my_groups(request, course_id):
+    groups = Group.objects.filter(course_id=course_id)
+    return render(request, "education/group/my_groups.html", {'groups': groups})
+
+
 @login_required(login_url='login')
 def group_detail(request, pk):
     teacher = None

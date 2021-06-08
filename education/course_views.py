@@ -11,7 +11,7 @@ def course_detail(request, pk):
     course = Course.objects.get(pk=pk)
     groups = Group.objects.filter(course=course)
     topics = course.syllabus.split(', ')
-    languages = course.languages.split(',')
+    languages = course.languages.split(', ')
     return render(request, 'education/course/course.html',
                   {'course': course, 'topics': topics, 'groups': groups, 'languages': languages})
 

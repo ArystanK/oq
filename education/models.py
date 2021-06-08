@@ -47,4 +47,4 @@ class Lesson(models.Model):
     time = models.DateTimeField()
 
     def __str__(self):
-        return str(self.group) + " at " + str(self.time.date()) + " " + str(self.time.time())
+        return str(self.group.course) + " at " + str(self.time.date()) + " " + str(self.time.time())

@@ -3,6 +3,43 @@
 {% block title %}Search{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/searchstyle.css' %}">
+
+    <style>
+
+        p{
+            margin-top: 3vh;
+            font-size: 20px;
+        }
+        .footer{
+            height: 15vh;
+        }
+        .search {
+            border: 2px solid #ffa801;
+            text-align: center;
+            width: 600px;
+            border-radius: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5vh;
+        }
+
+        input[type="submit"]{
+            margin-top: 4vh;
+            border: none;
+            background-color: #2ecc71;
+            font-weight: bold;
+            color: white;
+            border-radius: 30px;
+            padding: 15px;
+            font-size: 20px;
+            margin-bottom: 2vh;
+        }
+
+        input[type="submit"]:hover{
+            background-color: #ffa801;
+            transition: 0.2s;
+        }
+    </style>
 {% endblock %}
 {% block content %}
     {% include 'education/search_form.html' %}
@@ -26,4 +63,5 @@
             {% endfor %}
         {% endif %}
     </div>
+    <div class="footer"></div>
 {% endblock %}

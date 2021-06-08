@@ -1,5 +1,44 @@
 {% extends 'base.html' %}
 {% block title %}Create lesson{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+    <style>
+
+        input{
+            border: 2px solid #ffa801;
+            margin-left: 5vw;
+        }
+        textarea {
+            border: 2px solid #ffa801;
+        }
+        form {
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10vh;
+        }
+
+        input[type="submit"]{
+            padding: 10px;
+            border: none;
+            background-color: #2ecc71;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+
+            margin-left: 5vw;
+            margin-top: 5vh;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ffa801;
+            transition: 0.2s;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <form method="post">
         {% csrf_token %}

@@ -1,30 +1,99 @@
 {% extends 'base.html' %}
 {% block title %}{{ assignment }}{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+    <style>
+        h1 {
+            margin-left: 5vw;
+            margin-top: 10vh;
+            font-size: 40px;
+        }
+
+        .main {
+            margin-left: 5vw;
+            margin-top: 2vh;
+        }
+
+        .submission-box {
+            margin-top: 3vh;
+        }
+
+        .grade {
+            font-weight: 700;
+            margin-top: 2vh;
+        }
+
+        .delete {
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #e74c3c;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+
+        .update{
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #ffa801;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+        .update:hover {
+            background-color: #f39c12;
+        }
+        .delete:hover {
+            background-color: #c0392b;
+        }
+
+        .buttons {
+            margin-left: 5vw;
+            margin-top: 3vh;
+            margin-bottom: 5vh;
+        }
+    </style>
+
+{% endblock %}
 {% block content %}
-    <h1>{{ assignment }}</h1>
-    <p>{{ assignment.description }}</p>
-    {% if assignment.task %}
-        <a href="{{ assignment.task.url }}">Task</a>
+    <h1>{{ assignment.title }}</h1>
+    {% if request.user.groups.first.name != 'student' %}
+        <div class="buttons">
+            <a href="{% url 'update_assignment' assignment.pk %}" class="delete">Update</a>
+            <a href="{% url 'delete_assignment' assignment.pk %}" class="update">Delete</a>
+        </div>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% if request.user.groups.first.name == 'student' %}
-            <label for="id_submission">Submission: </label>
-            <input type="file" name="submission" required id="id_submission">
-            <input type="submit" value="Submit">
-        {% else %}
-            {% if assignment.submission %}
-                <a href="{{ assignment.submission.url }}">Submission</a>
-            {% else %}
-                <p>No submission</p>
-            {% endif %}
+    <div class="main">
+        <p>Task: {{ assignment.description }}</p>
+        {% if assignment.task %}
+            <a href="{{ assignment.task.url }}">Task</a>
         {% endif %}
-    </form>
-    {% if assignment.grade %}
-        <p>Grade: {{ assignment.grade }}</p>
-    {% else %}
-        <p>Not graded</p>
-    {% endif %}
-    <a href="{% url 'update_assignment' assignment.pk %}">Update</a>
-    <a href="{% url 'delete_assignment' assignment.pk %}">Delete</a>
+        <form method="post" enctype="multipart/form-data" class="submission-box">
+            {% csrf_token %}
+            {% if request.user.groups.first.name == 'student' %}
+                <label for="id_submission">Submission: </label>
+                <input type="file" name="submission" required id="id_submission">
+                <input type="submit" value="Submit">
+            {% else %}
+                {% if assignment.submission %}
+                    <a href="{{ assignment.submission.url }}">Submission</a>
+                {% else %}
+                    <p>No submission</p>
+                {% endif %}
+            {% endif %}
+        </form>
+        {% if assignment.grade %}
+            <p class="grade">Grade: {{ assignment.grade }}</p>
+        {% else %}
+            <p class="grade">Not graded</p>
+        {% endif %}
+    </div>
 {% endblock %}

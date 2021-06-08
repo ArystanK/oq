@@ -3,6 +3,51 @@
 {% block title %}Course{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/coursestyle.css' %}">
+
+    <style>
+        .buttons{
+            display: flex;
+            margin-bottom: 3vh;
+            margin-top: 3vh;
+        }
+        .delete {
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #e74c3c;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+
+        .update{
+            padding: 10px;
+            margin-right: 2vw;
+            border: none;
+            background-color: #ffa801;
+            font-size: 25px;
+            color: white;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 5vh;
+        }
+        .update:hover {
+            background-color: #f39c12;
+        }
+        .delete:hover {
+            background-color: #c0392b;
+        }
+
+        .mygroups {
+            background-color: #2ecc71;
+        }
+        .mygroups:hover {
+            background-color: #27ae60;
+        }
+
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -10,6 +55,13 @@
         <div class="main-info">
             <div class="left">
                 <div class="course-name">{{ course.course_name }}</div>
+                {% if request.user == course.teacher.user %}
+                    <div class="buttons">
+                        <p><a href="{% url 'delete_course' course.pk %}" class="delete">Delete</a></p>
+                        <p><a href="{% url 'update_course' course.pk %}" class="update">Edit</a></p>
+                        <p><a href="{% url 'my_groups' course.pk %}" class="update mygroups">My Groups</a></p>
+                    </div>
+                {% endif %}
                 <div class="slots">Classes in a group of {{ course.max_students }} people</div>
 
                                <iframe width="720" height="420" src="https://www.youtube.com/embed/OTroAxvRNbw"
@@ -22,10 +74,7 @@
                 <div class="tutor-name">{{ course.teacher }}</div>
             </div>
             {#            TODO: Add edit courses function and work with styles#}
-            {% if request.user == course.teacher.user %}
-                <p><a href="{% url 'update_course' course.pk %}">Edit</a></p>
-                <p><a href="{% url 'delete_course' course.pk %}">Delete</a></p>
-            {% endif %}
+
         </div>
 
         <div class="about-course">
@@ -58,10 +107,6 @@
                     <input type="submit" value="Apply" class="applybutton">
                 </form>
             </div>
-        {% else %}
-            {% for group in groups %}
-                <a href="{% url 'group_detail' group.pk %}">{{ group }}</a>
-            {% endfor %}
         {% endif %}
     </div>
 {% endblock %}

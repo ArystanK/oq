@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}My groups{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <style>
+        .groups{
+            color: #ffa801;
+            font-weight: bolder;
+            font-size: 50px;
+            margin-top: 15vh;
+        }
+        li > a{
+            color: white;
+            font-weight: bold;
+            background-color: #2ecc71;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        li > a:hover {
+            background-color: #ffa801;
+            transition: 0.2s;
+        }
+
+        li{
+            margin-left: 5vw;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin-left: 5vw;
+            margin-top: 10vh;
+        }
+
+        ol {
+            font-size: 30px;
+            color: black;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>My Groups</h1>
+    <div class="groups">
+        <ol>
+            {% for group in groups %}
+                <li><a class="group" href="{% url 'group_detail' group.pk %}"> {{ group.language }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
