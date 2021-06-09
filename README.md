@@ -1,1 +1,3 @@
-[Frontend till 10th of June], [Backend, Frontend, Debug, fill database with data and presentation till final]
+Tasks:
+  1. 10th of June -> [Frontend], 
+  2. Final -> [Backend (payment), fill database with data, documentation and presentation]
