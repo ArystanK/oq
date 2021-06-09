@@ -3,6 +3,20 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <style>
+        input{
+            border: 2px solid #ffa801;
+        }
+        textarea {
+            border: 2px solid #ffa801;
+        }
+        form {
+            text-align: center;
+            width: 400px;
+            border-radius: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10vh;
+        }
         input[type="submit"]{
             padding: 10px;
             border: none;
@@ -24,8 +38,18 @@
         p {
             font-size: 25px;
             margin-left: 5vw;
-            margin-top: 15vh;
+            margin-top: 10vh;
         }
+
+        input[type="file"]{
+            border: none;
+            margin-left: 1vw;
+        }
+
+        form a {
+            font-size: 15px;
+        }
+
     </style>
 {% endblock %}
 {% block content %}
