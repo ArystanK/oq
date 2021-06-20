@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
+
 from education import views, course_views, group_views, lessson_views, assignment_views
 
 urlpatterns = [
@@ -29,7 +30,6 @@ urlpatterns = [
     path('group_detail/<int:pk>', group_views.group_detail, name="group_detail"),
     path('delete_group/<int:pk>', group_views.delete_group, name="delete_group"),
     path('my_groups/<int:course_id>', group_views.my_groups, name="my_groups"),
-
 
     path('create_lesson/<int:pk>', lessson_views.create_lesson, name="create_lesson"),
     path('delete_lesson/<int:pk>', lessson_views.delete_lesson, name="delete_lesson"),

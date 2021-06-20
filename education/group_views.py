@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from accounts.decorators import allowed_users
 
@@ -14,18 +15,10 @@ def apply_for_course(request, course_id):
     student = Student.objects.get(user=request.user)
     course = Course.objects.get(pk=course_id)
     language = request.POST.get('language')
-    groups = Group.objects.filter(course=course, language=language, number_of_students__lt=course.max_students)
-    if len(groups) == 0:
-        group = Group(course=course, language=language)
-        group.save()
-        group.students.add(student)
-        group.save()
-        return redirect('home')
-    group = groups.first()
-    group.students.add(student)
-    group.number_of_students = len(group.students.all())
-    group.save()
-    return redirect('home')
+    request.session['course_id'] = course.id
+    request.session['student_id'] = student.pk
+    request.session['language'] = language
+    return redirect(reverse('process'))
 
 
 @allowed_users(allowed_roles=['teacher'])
@@ -38,15 +31,19 @@ def my_groups(request, course_id):
 @login_required(login_url='login')
 def group_detail(request, pk):
     teacher = None
-    if request.user.groups.first() == 'teacher':
-        teacher = Teacher.objects.get(user=request.user)
+    student = None
     group = Group.objects.get(pk=pk)
     lessons = Lesson.objects.filter(group=group)
-    lesson_count = len(lessons)
-    assignments = Assignment.objects.filter(group=group)
+    if request.user.groups.first() != 'student':
+        teacher = Teacher.objects.get(user=request.user)
+        assignments = Assignment.objects.filter(group=group)
+    else:
+        student = Student.objects.get(user=request.user)
+        assignments = Assignment.objects.filter(group=group, student=student)
     assignment_count = len(assignments)
+    lesson_count = len(lessons)
     context = {'group': group, 'lessons': lessons, 'lesson_count': lesson_count, 'assignments': assignments,
-               'assignment_count': assignment_count, 'teacher': teacher}
+               'assignment_count': assignment_count, 'teacher': teacher, 'student': student}
     return render(request, 'education/group/group.html', context)
 
 

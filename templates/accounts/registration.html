@@ -21,6 +21,7 @@
             <div class="info">
                 <p class="reg">Registration as {% if is_student == 1 %}student{% else %}tutor{% endif %}</p>
                 <p class="reginfo">fill the form</p>
+                {% if is_student == 0 %}<p class="reginfo">Use your paypal email</p>{% endif %}
             </div>
 
             <div class="inputs">

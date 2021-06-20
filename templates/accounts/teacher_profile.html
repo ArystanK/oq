@@ -11,18 +11,19 @@
         .course > * {
             text-align: center;
         }
+
         .course > .description {
             margin: 10px;
         }
 
-        .mycourses{
+        .mycourses {
             color: #ffa801;
             font-weight: bolder;
             font-size: 50px;
             margin-left: 5vw;
         }
 
-        .courses{
+        .courses {
             flex-wrap: wrap;
             margin-top: 0;
         }
@@ -41,11 +42,13 @@
             font-size: 75px;
             color: #ffa801;
         }
+
         .addcourse > .createnewcourse {
             color: #ffa801;
             font-weight: bolder;
             font-size: 25px;
         }
+
         .edit {
             font-weight: bolder;
             color: #ffa801;
@@ -54,11 +57,11 @@
             padding: 10px;
         }
 
-        .editp{
+        .editp {
             margin-top: 2vh;
         }
 
-        .edit:hover{
+        .edit:hover {
             background-color: #ffa801;
             color: white;
             transition: 0.2s;
@@ -70,7 +73,7 @@
     <div class="main-info">
         <div class="left">
             <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
-    <p class="editp"><a class="edit" href="{% url 'edit_profile' %}">Edit Profile</a></p>
+            <p class="editp"><a class="edit" href="{% url 'edit_profile' %}">Edit Profile</a></p>
             <div class="info">
                 <p>{{ teacher.about_me }}</p>
             </div>
@@ -95,7 +98,4 @@
             <p class="createnewcourse">Create new course</p>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
 {% endblock %}

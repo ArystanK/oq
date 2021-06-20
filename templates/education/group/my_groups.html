@@ -44,7 +44,7 @@
     <div class="groups">
         <ol>
             {% for group in groups %}
-                <li><a class="group" href="{% url 'group_detail' group.pk %}"> {{ group.language }}</a></li>
+                <li><a class="group" href="{% url 'group_detail' group.pk %}"> {{ group  }}</a></li>
             {% endfor %}
         </ol>
     </div>

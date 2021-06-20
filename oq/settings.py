@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'accounts',
     'education',
     'django_filters',
-    'payment'
+    'payment',
+    'paypal.standard.ipn'
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'oq_db',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'qwerty',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -134,3 +135,7 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+# django paypal settings
+PAYPAL_RECEIVER_EMAIL = 'aarystan@outlook.com'
+PAYPAL_TEST = True
