@@ -15,24 +15,15 @@
         }
 
         .programm:hover {
-
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
         }
 
-        .row {
-            margin-right: 60px;
-            margin-left: 60px;
-            align-content: center;
-            display: flex;
-            height: 50%;
-            align-items: center;
-        }
     </style>
 {% endblock %}
 {% block content %}
     <div class="head">
         <div class="head-box">
-            <div class="find">
+            <div class="find" style="color: white">
                 Find a <strong>perfect</strong> matching course
             </div>
             <div class="search-box">
@@ -41,7 +32,7 @@
                         <div class="txt">
                             <label>
                                 <input name="course_name" id="id_course_name" type="text" placeholder="Search"
-                                       style="width: 600px; border: none; font-size: 20px; margin-top: 10px; outline: none">
+                                       style="width: 600px; height: 40px; border: none; font-size: 20px; margin-top: 10px; padding-left: 10px;">
                             </label>
                         </div>
                     </div>
@@ -51,15 +42,16 @@
         </div>
     </div>
 
+    <div class="examples">
+        {% for course in courses %}
+            <div class="programm">
+                <div class="txt1"
+                     onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
+            </div>
+        {% endfor %}
+    </div>
     {% if request.user.is_authenticated %}
-        <div class="examples">
-            {% for course in courses %}
-                <div class="programm">
-                    <div class="txt1"
-                         onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
-                </div>
-            {% endfor %}
-        </div>
+        <h1>WELCOME</h1>
     {% else %}
         <div class="reg">
             <div class="reg-box">
@@ -88,19 +80,4 @@
         </div>
     {% endif %}
 
-    <div class="row">
-        <div class="card">
-            <h1>Learn new skills</h1>
-            <p>Using oq you will learn new skills in different spheres</p>
-        </div>
-        <div class="card">
-            <h1>Get ready for a career</h1>
-            <p>Using oq you will be prepared for your future job! All you have to do is find suitable course</p>
-        </div>
-        <div class="card">
-            <h1>Educate people</h1>
-            <p>In oq you can try yourself as educator! Just press register as tutor</p>
-        </div>
-
-    </div>
 {% endblock %}
