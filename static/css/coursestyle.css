@@ -58,7 +58,7 @@ img {
 .tutor-name{
 	font-size: 40px;
 	margin-left: 20vw;
-	margin-top: 15vh;
+	/*margin-top: 15vh;*/
 }
 
 .stats {
