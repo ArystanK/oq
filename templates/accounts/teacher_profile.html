@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <style>
         .name > a {
-            color: #ffa801;
+            color: black;
         }
 
         .course > * {
@@ -17,7 +17,6 @@
         }
 
         .mycourses {
-            color: #ffa801;
             font-weight: bolder;
             font-size: 50px;
             margin-left: 5vw;
@@ -29,22 +28,21 @@
         }
 
         .course {
+            border: 2.5px solid black;
             margin-top: 5vh;
             flex-basis: 25%;
         }
 
         .addcourse {
             box-sizing: border-box;
-            border: 2.5px solid #ffa801;
+            border: 2.5px solid;
         }
 
         .addcourse > .plus {
             font-size: 75px;
-            color: #ffa801;
         }
 
         .addcourse > .createnewcourse {
-            color: #ffa801;
             font-weight: bolder;
             font-size: 25px;
         }
@@ -62,7 +60,8 @@
         }
 
         .edit:hover {
-            background-color: #ffa801;
+            border: 2.5px solid white;
+            background-color: black;
             color: white;
             transition: 0.2s;
         }
@@ -72,10 +71,10 @@
 {% block content %}
     <div class="main-info">
         <div class="left">
-            <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+            <h1 style="color: white">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
             <p class="editp"><a class="edit" href="{% url 'edit_profile' %}">Edit Profile</a></p>
             <div class="info">
-                <p>{{ teacher.about_me }}</p>
+                <p style="color: white">{{ teacher.about_me }}</p>
             </div>
         </div>
 

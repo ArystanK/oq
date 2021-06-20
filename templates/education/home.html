@@ -4,19 +4,29 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        .txt1{
+        .txt1 {
             font-size: 20px;
             color: #ffa801;
             text-align: center;
         }
+
         .programm {
             padding: 10px;
         }
+
         .programm:hover {
 
-             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
         }
 
+        .row {
+            margin-right: 60px;
+            margin-left: 60px;
+            align-content: center;
+            display: flex;
+            height: 50%;
+            align-items: center;
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -45,7 +55,8 @@
         <div class="examples">
             {% for course in courses %}
                 <div class="programm">
-                    <div class="txt1" onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
+                    <div class="txt1"
+                         onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
                 </div>
             {% endfor %}
         </div>
@@ -76,4 +87,20 @@
             </div>
         </div>
     {% endif %}
+
+    <div class="row">
+        <div class="card">
+            <h1>Learn new skills</h1>
+            <p>Using oq you will learn new skills in different spheres</p>
+        </div>
+        <div class="card">
+            <h1>Get ready for a career</h1>
+            <p>Using oq you will be prepared for your future job! All you have to do is find suitable course</p>
+        </div>
+        <div class="card">
+            <h1>Educate people</h1>
+            <p>In oq you can try yourself as educator! Just press register as tutor</p>
+        </div>
+
+    </div>
 {% endblock %}

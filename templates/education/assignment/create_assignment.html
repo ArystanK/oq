@@ -4,13 +4,15 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <style>
-        input{
+        input {
             border: 2px solid #ffa801;
             margin-left: 5vw;
         }
+
         textarea {
             border: 2px solid #ffa801;
         }
+
         form {
             width: 300px;
             margin-left: auto;
@@ -18,7 +20,7 @@
             margin-top: 10vh;
         }
 
-        input[type="submit"]{
+        input[type="submit"] {
             padding: 10px;
             border: none;
             background-color: #2ecc71;
@@ -35,7 +37,8 @@
             background-color: #ffa801;
             transition: 0.2s;
         }
-        input[type="file"]{
+
+        input[type="file"] {
             border: none;
         }
     </style>
@@ -43,6 +46,7 @@
 {% block content %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h4>Creating assignment for {{ group }}</h4>
         {{ form.as_p }}
         <input type="submit" value="Create">
     </form>
