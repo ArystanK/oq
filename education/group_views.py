@@ -34,7 +34,7 @@ def group_detail(request, pk):
     student = None
     group = Group.objects.get(pk=pk)
     lessons = Lesson.objects.filter(group=group)
-    if request.user.groups.first() != 'student':
+    if request.user.groups.first().name != 'student':
         teacher = Teacher.objects.get(user=request.user)
         assignments = Assignment.objects.filter(group=group)
     else:

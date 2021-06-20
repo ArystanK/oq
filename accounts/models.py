@@ -14,7 +14,6 @@ class Student(models.Model):
 class Teacher(models.Model):
     profile_picture = models.ImageField(default="profile_pic.jpeg")
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    language = models.CharField(max_length=255)
     about_me = models.TextField()
 
     def __str__(self):

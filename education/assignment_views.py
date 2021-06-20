@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from accounts.decorators import allowed_users
-from accounts.models import Teacher, Student
+from accounts.models import Teacher
 from education.forms import CreateAssignmentForm, UpdateAssignmentForm
 from education.models import Assignment, Group
 
@@ -14,7 +14,7 @@ def create_assignments(request, pk):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
-        task = request.POST.get('task')
+        task = request.FILES.get('task')
         for student in group.students.all():
             assignment = Assignment(title=title, description=description, task=task, student=student, group=group)
             assignment.save()
@@ -29,7 +29,7 @@ def create_assignment(request, pk):
     form = CreateAssignmentForm()
     students = group.students
     if request.method == 'POST':
-        form = CreateAssignmentForm(request.POST)
+        form = CreateAssignmentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -40,6 +40,13 @@ def create_assignment(request, pk):
 @login_required(login_url='login')
 def assignment_detail(request, pk):
     assignment = Assignment.objects.get(pk=pk)
+    if request.method == 'POST':
+        if request.POST.get('submission-clear'):
+            assignment.submission.delete()
+        else:
+            submission = request.FILES.get('submission')
+            assignment.submission = submission
+            assignment.save()
     return render(request, 'education/assignment/assignment.html', {'assignment': assignment})
 
 
@@ -65,7 +72,7 @@ def update_assignment(request, pk):
     if Teacher.objects.get(user=request.user) != assignment.group.course.teacher:
         return redirect('home')
     if request.method == "POST":
-        form = UpdateAssignmentForm(request.POST, instance=assignment)
+        form = UpdateAssignmentForm(request.POST, request.FILES, instance=assignment)
         form.save()
         return redirect('profile')
     context = {'assignment': assignment, 'students': students, 'form': form, 'group': group}

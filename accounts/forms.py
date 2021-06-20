@@ -14,7 +14,7 @@ class CreateUserForm(UserCreationForm):
 class UpdateTeacherForm(ModelForm):
     class Meta:
         model = Teacher
-        fields = ['about_me', 'language', 'profile_picture']
+        fields = ['about_me', 'profile_picture']
 
 
 class UpdateStudentForm(ModelForm):

@@ -37,7 +37,7 @@
             margin-top: 5vh;
         }
 
-        .update{
+        .update {
             padding: 10px;
             margin-right: 2vw;
             border: none;
@@ -48,9 +48,11 @@
             font-weight: 700;
             margin-top: 5vh;
         }
+
         .update:hover {
             background-color: #f39c12;
         }
+
         .delete:hover {
             background-color: #c0392b;
         }
@@ -76,20 +78,21 @@
         {% if assignment.task %}
             <a href="{{ assignment.task.url }}">Task</a>
         {% endif %}
-        <form method="post" enctype="multipart/form-data" class="submission-box">
-            {% csrf_token %}
-            {% if request.user.groups.first.name == 'student' %}
-                <label for="id_submission">Submission: </label>
-                <input type="file" name="submission" required id="id_submission">
+        {% if assignment.submission %}
+            <a href="{{ assignment.submission.url }}">Submission</a>
+        {% else %}
+            <p>No submission</p>
+        {% endif %}
+        {% if request.user.groups.first.name == 'student' %}
+            <form class="submission-box" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p><input type="checkbox" name="submission-clear" id="submission-clear-id">
+                    <label for="submission-clear-id">Delete submission</label></p>
+                <p><label for="id_submission">Change submission: </label>
+                    <input type="file" name="submission" id="id_submission" value="{{ assignment.submission }}"></p>
                 <input type="submit" value="Submit">
-            {% else %}
-                {% if assignment.submission %}
-                    <a href="{{ assignment.submission.url }}">Submission</a>
-                {% else %}
-                    <p>No submission</p>
-                {% endif %}
-            {% endif %}
-        </form>
+            </form>
+        {% endif %}
         {% if assignment.grade %}
             <p class="grade">Grade: {{ assignment.grade }}</p>
         {% else %}
