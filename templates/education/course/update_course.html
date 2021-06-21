@@ -4,14 +4,16 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <style>
-    input{
-        border: none;
+        input {
+            border: none;
             border-bottom: 2px solid #ffa801;
             margin-left: 5vw;
         }
+
         textarea {
             border: 2px solid #ffa801;
         }
+
         form {
             font-size: 20px;
             width: 200px;
@@ -20,7 +22,7 @@
             margin-top: 10vh;
         }
 
-        input[type="submit"]{
+        input[type="submit"] {
             padding: 10px;
             border: none;
             background-color: #2ecc71;
@@ -37,6 +39,7 @@
             background-color: #ffa801;
             transition: 0.2s;
         }
+
         input[type="file"] {
             border: none;
         }
@@ -51,10 +54,10 @@
     <script>
         // make setting start and end date date fields
         const fields = document.getElementsByTagName('input');
+        fields[3].type = "date";
+        fields[3].value = '{{ start_date }}';
         fields[4].type = "date";
-        fields[4].value = '{{ start_date }}';
-        fields[5].type = "date";
-        fields[5].value = '{{ end_date }}';
+        fields[4].value = '{{ end_date }}';
 
         // hide teacher selection and set it to registered teacher
         document.getElementsByTagName('label')[3].hidden = true;

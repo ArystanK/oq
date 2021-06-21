@@ -11,7 +11,8 @@
         }
 
         .programm {
-            padding: 10px;
+            cursor: pointer;
+            padding: 20px;
         }
 
         .programm:hover {
@@ -50,9 +51,7 @@
             </div>
         {% endfor %}
     </div>
-    {% if request.user.is_authenticated %}
-        <h1>WELCOME</h1>
-    {% else %}
+    {% if not request.user.is_authenticated %}
         <div class="reg">
             <div class="reg-box">
                 <div class="registeras">

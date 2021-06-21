@@ -4,7 +4,7 @@ from accounts.models import Teacher, Student
 
 class Course(models.Model):
     course_name = models.CharField(max_length=50)
-    about_course = models.CharField(max_length=255)
+    about_course = models.TextField()
     price = models.FloatField()
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
