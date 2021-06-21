@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Pay using PayPal{% endblock %}
 {% block content %}
-    <h1>Pay using PayPal</h1>
-    <p>You are buying course "{{ course }}" for ${{ course.price }}</p>
-    {{ form.render }}
-    {{ teacher_form.render }}
+    {% if course %}
+        <h1>Pay using PayPal</h1>
+        <p>You are buying course "{{ course }}" for ${{ course.price }}</p>
+        {{ form.render }}
+        {{ teacher_form.render }}
+    {% else %}
+        <p>You are already in this group</p>
+    {% endif %}
 {% endblock %}

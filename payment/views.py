@@ -9,12 +9,7 @@ from education.models import Group, Course
 
 @csrf_exempt
 def payment_done(request):
-    course_id = request.session.get('course_id')
-    course = Course.objects.get(id=course_id)
-    student_id = request.session.get('student_id')
-    student = Student.objects.get(pk=student_id)
-    language = request.session.get('language')
-    groups = Group.objects.filter(course=course, language=language, number_of_students__lt=course.max_students)
+    course_id, course, student, groups, language = get_session_data(request)
     if len(groups) == 0:
         group = Group(course=course, language=language)
         group.save()
@@ -24,7 +19,7 @@ def payment_done(request):
     group.number_of_students = group.number_of_students + 1
     group.students.add(student)
     group.save()
-    return render(request, 'payment/done.html')
+    return render(request, 'payment/done.html', context={'group': group})
 
 
 @csrf_exempt
@@ -33,8 +28,11 @@ def payment_canceled(request):
 
 
 def payment_process(request):
-    course_id = request.session.get('course_id')
-    course = Course.objects.get(id=course_id)
+    course_id, course, student, groups, _ = get_session_data(request)
+    if len(groups) > 0:
+        group = groups.first()
+        if student in group.students.all():
+            return render(request, 'payment/process.html')
     host = request.get_host()
     paypal_teacher_dict = {
         'business': course.teacher.user.username,
@@ -48,3 +46,13 @@ def payment_process(request):
     }
     teacher_form = PayPalPaymentsForm(initial=paypal_teacher_dict)
     return render(request, 'payment/process.html', {'course': course, 'teacher_form': teacher_form})
+
+
+def get_session_data(request):
+    course_id = request.session.get('course_id')
+    course = Course.objects.get(id=course_id)
+    student_id = request.session.get('student_id')
+    student = Student.objects.get(pk=student_id)
+    language = request.session.get('language')
+    groups = Group.objects.filter(course=course, language=language, number_of_students__lt=course.max_students)
+    return course_id, course, student, groups, language

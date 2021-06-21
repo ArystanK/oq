@@ -11,17 +11,21 @@
             background-size: cover;
         }
 
-        .txt1 {
-            font-size: 20px;
+
+        .programm {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 15px;
             color: #ffa801;
+            font-size: 20px;
             text-align: center;
         }
 
-        .programm {
-            padding: 10px;
-        }
-
         .programm:hover {
+            background: rgba(252, 252, 252, 0.7);
+            border-radius: 20px;
+            color: black;
+            border-color: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
         }
 
@@ -36,12 +40,10 @@
             <div class="search-box">
                 <form method="get" action="{% url 'search' %}">
                     <div class="search">
-                        <div class="txt">
-                            <label>
-                                <input name="course_name" id="id_course_name" type="text" placeholder="Search"
-                                       style="width: 600px; height: 40px; border: none; font-size: 20px; margin-top: 10px; padding-left: 10px;">
-                            </label>
-                        </div>
+                        <label>
+                            <input name="course_name" id="id_course_name" type="text" placeholder="Search"
+                                   style="width: 600px; height: 40px; border: none; font-size: 20px; margin-top: 10px; padding-left: 10px;">
+                        </label>
                     </div>
                 </form>
 
@@ -51,9 +53,7 @@
 
     <div class="examples">
         {% for course in courses %}
-            <div class="programm">
-                <div class="txt1"
-                     onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
+            <div class="programm" onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}
             </div>
         {% endfor %}
     </div>

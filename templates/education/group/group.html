@@ -89,7 +89,8 @@
     <h1>{{ group.course }}</h1>
 
     <p class="lang">Language: {{ group.language }}</p>
-    <p class="lang">Teacher: {{ group.course.teacher }}</p>
+    <p class="lang">Teacher: {{ group.course.teacher }} - <a
+            href="mailto:{{ group.course.teacher.user.username }}">{{ group.course.teacher.user.username }}</a></p>
     <div class="main">
         <div class="left">
             <div class="lesson">
@@ -137,7 +138,8 @@
         <p class="studnum">Students ({{ group.number_of_students }}): </p>
         <ol class="studs">
             {% for student in group.students.all %}
-                <li class="stud">{{ student }}</li>
+                <li class="stud">{{ student }} - <a
+                        href="mailto:{{ student.user.username }}">{{ student.user.username }}</a></li>
             {% endfor %}
         </ol>
         <div class="right">

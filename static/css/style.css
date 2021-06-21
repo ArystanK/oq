@@ -20,17 +20,9 @@
 .search {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
     height: 6vh;
-    width: 50vw;
+    width: 60vw;
     margin-left: 5vw;
     margin-top: 2vh;
-}
-
-.search > .txt {
-    font-weight: 200;
-    opacity: 0.5;
-    margin-top: 1.2vh;
-    margin-left: 2vw;
-    font-size: 20px;
 }
 
 .search-add {
