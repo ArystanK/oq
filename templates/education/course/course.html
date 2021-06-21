@@ -71,9 +71,7 @@
 
             </div>
             <div>
-                <img src="{{ course.teacher.profile_picture.url }}" alt="Teacher"
-                     style="margin-left: 300px; margin-top: 150px; width: 150px">
-                <div class="tutor-name" style="margin-top: 0"><p>{{ course.teacher }}</p></div>
+                <div class="tutor-name"><p>{{ course.teacher }}</p></div>
                 <div class="tutor-name" style="margin-top: 0; font-size: 20px"><p><a
                         href="mailto:{{ course.teacher.user.username }}">{{ course.teacher.user.username }}</a></p>
                 </div>

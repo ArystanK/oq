@@ -4,28 +4,17 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        body {
-            width: 100%;
-            height: 100vh;
-            background-image: url({% static 'img/background.jpg' %});
-            background-size: cover;
-        }
-
-
-        .programm {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            padding: 15px;
-            color: #ffa801;
+        .txt1 {
             font-size: 20px;
+            color: #ffa801;
             text-align: center;
         }
 
+        .programm {
+            padding: 10px;
+        }
+
         .programm:hover {
-            background: rgba(252, 252, 252, 0.7);
-            border-radius: 20px;
-            color: black;
-            border-color: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
         }
 
@@ -34,16 +23,18 @@
 {% block content %}
     <div class="head">
         <div class="head-box">
-            <div class="find" style="color: white">
+            <div class="find">
                 Find a <strong>perfect</strong> matching course
             </div>
             <div class="search-box">
                 <form method="get" action="{% url 'search' %}">
                     <div class="search">
-                        <label>
-                            <input name="course_name" id="id_course_name" type="text" placeholder="Search"
-                                   style="width: 600px; height: 40px; border: none; font-size: 20px; margin-top: 10px; padding-left: 10px;">
-                        </label>
+                        <div class="txt">
+                            <label>
+                                <input name="course_name" id="id_course_name" type="text" placeholder="Search"
+                                       style="width: 600px; height: 40px; border: none; font-size: 20px; margin-top: 10px; padding-left: 10px;">
+                            </label>
+                        </div>
                     </div>
                 </form>
 
@@ -53,11 +44,15 @@
 
     <div class="examples">
         {% for course in courses %}
-            <div class="programm" onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}
+            <div class="programm">
+                <div class="txt1"
+                     onclick="window.location.href = '{% url 'course_detail' course.pk %}';">{{ course }}  </div>
             </div>
         {% endfor %}
     </div>
-    {% if not request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
+        <h1>WELCOME</h1>
+    {% else %}
         <div class="reg">
             <div class="reg-box">
                 <div class="registeras">
