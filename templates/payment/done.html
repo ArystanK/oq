@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Payment complete{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
 {% block content %}
     <h1>Your payment was successful</h1>
     <p>Payment was successful received</p>

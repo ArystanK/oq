@@ -1,11 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Pay using PayPal{% endblock %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 5vh;
+        }
+        
+        p {
+            text-align: center;
+            margin-top: 10vh;
+        }
+
+        .pay {
+            text-align: center;
+            margin-top: 2vh;
+        }
+        
+    </style>
+{% endblock %}
 {% block content %}
     {% if course %}
         <h1>Pay using PayPal</h1>
         <p>You are buying course "{{ course }}" for ${{ course.price }}</p>
-        {{ form.render }}
-        {{ teacher_form.render }}
+        <div class="pay">
+            {{ form.render }}
+            {{ teacher_form.render }}
+        </div>
     {% else %}
         <p>You are already in this group</p>
     {% endif %}

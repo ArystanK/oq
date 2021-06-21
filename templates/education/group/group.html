@@ -21,9 +21,6 @@
             margin-top: 7vh;
         }
 
-        .studs {
-            margin-top: 3vh;
-        }
 
         ol {
             font-weight: 600;
@@ -36,11 +33,17 @@
 
         .right {
             display: flex;
-            margin-left: 10vw;
             flex-direction: column;
         }
 
-        .right a {
+        .knopki {
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .knopki a {
             color: white;
             background-color: #ffa801;
             border-radius: 30px;
@@ -49,13 +52,9 @@
             margin-top: 3vh;
         }
 
-        .right a:hover {
+        .knopki a:hover {
             background-color: #2ecc71;
             transition: 0.3s;
-        }
-
-        .lesson {
-            display: flex;
         }
 
         ol {
@@ -68,20 +67,42 @@
         }
 
         .lesson li {
-            margin-top: 2vh;
+            margin-top: 5vh;
+        }
+
+        .left {
+            margin-top: 0;
         }
 
         .lesson {
+            width: 65vw;
+            display: flex;
+            margin-top: 7vh;
+            margin-left: 150px;
             border: 3px solid #ffa801;
-            width: 50vw;
             border-radius: 30px;
-            padding: 20px;
+            padding: 20px 20px 4vh;
         }
 
-        .lesson a:visited {
-            color: blue;
+        .lesson_title {
+            color: black;
         }
 
+        .studs {
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .teacherbar {
+            display: flex;
+            text-align: center;
+            margin-top: 7vh;
+        }
+
+        .teacherbar a {
+            width: 400px;
+        }
     </style>
 
 {% endblock %}
@@ -94,19 +115,19 @@
     <div class="main">
         <div class="left">
             <div class="lesson">
-                <div class="lesson left">
+                <div class="left">
                     {% if lesson_count != 0 %}
                         <p class="pp">Lessons: </p>
                         <ol>
                             {% for lesson in lessons %}
-                                <li><a href="{% url 'lesson_detail' lesson.pk %}">{{ lesson.time }}</a></li>
+                                <li><a class="lesson_title" href="{% url 'lesson_detail' lesson.pk %}">{{ lesson.time }}</a></li>
                             {% endfor %}
                         </ol>
                     {% else %}
                         <p>You don't have any lesson</p>
                     {% endif %}
                 </div>
-                <div class="lesson right">
+                <div class="right">
                     {% if assignment_count != 0 %}
                         <p class="pp">Assignments: </p>
                         <ol>
@@ -135,18 +156,20 @@
     </div>
 
     {% if request.user.groups.first.name != 'student' and teacher.pk == group.course.teacher.pk %}
-        <p class="studnum">Students ({{ group.number_of_students }}): </p>
-        <ol class="studs">
-            {% for student in group.students.all %}
-                <li class="stud">{{ student }} - <a
-                        href="mailto:{{ student.user.username }}">{{ student.user.username }}</a></li>
-            {% endfor %}
-        </ol>
-        <div class="right">
-            <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
-            <a href="{% url 'create_assignments' group.pk %}">Add assignment for all students</a>
-            <a href="{% url 'create_assignment' group.pk %}">Add assignment for particular student</a>
-            <a href="{% url 'delete_group' group.pk %}">Delete group</a>
+        <div class="teacherbar">
+            <ol class="studs">
+            <p class="studnum">Students ({{ group.number_of_students }}): </p>
+                {% for student in group.students.all %}
+                    <li class="stud">{{ student }} - <a
+                            href="mailto:{{ student.user.username }}">{{ student.user.username }}</a></li>
+                {% endfor %}
+            </ol>
+            <div class="knopki">
+                <a href="{% url 'create_lesson' group.pk %}">Add lesson</a>
+                <a href="{% url 'create_assignments' group.pk %}">Add assignment for all students</a>
+                <a href="{% url 'create_assignment' group.pk %}">Add assignment for particular student</a>
+                <a href="{% url 'delete_group' group.pk %}">Delete group</a>
+            </div>
         </div>
     {% endif %}
 {% endblock %}
